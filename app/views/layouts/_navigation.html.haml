@@ -1,1 +1,7 @@
-= link_to "Server", root_path, :class => 'brand'
+= link_to 'Home', root_path, :class => 'brand'
+- if current_user.nil?
+	= link_to 'Sign up', signup_path
+	= link_to 'Sign in', signin_path
+- else
+	= link_to 'Sign out', signout_path, method: 'delete'
+	= link_to 'Lobby', current_user

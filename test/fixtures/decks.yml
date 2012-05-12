@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  cards: MyString
+  hand: MyString
+
+two:
+  cards: MyString
+  hand: MyString

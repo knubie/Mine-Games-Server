@@ -1,0 +1,15 @@
+= form_for @match do |f|
+  -if @match.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@match.errors.count, "error")} prohibited this user from being saved:"
+      %ul
+        - @match.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    - @users.each do |u|
+      = u.username
+      = check_box_tag 'users[]', "#{u.id}"
+      %br
+  .actions
+    = f.submit 'Save'
