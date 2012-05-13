@@ -84,4 +84,19 @@ class UsersController < ApplicationController
 
   def lobby
   end
+
+  def friends
+    # Returns two arrays of friends, play_friends have already authenticated, invite_friends have not
+    if params[:data]
+      @friends = {play_friends: [], invite_friends: []}
+      params[:data].each do |friend|
+        friend.each do |f|
+          if User.exists?(uid: f["id"]) then @friends[:play_friends] << f else @friends[:invite_friends] << f end
+        end
+      end
+    end
+    respond_to do |format|
+      format.json { render json: @friends }
+    end
+  end
 end

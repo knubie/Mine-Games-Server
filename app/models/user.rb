@@ -2,12 +2,16 @@ class User < ActiveRecord::Base
   has_many :decks
   has_many :matches, :through => :decks
 
-  attr_accessible :email, :first_name, :last_name, :uid, :username, :password, :password_confirmation
+  # attr_accessor :password, :password_confirmation
 
-  has_secure_password unless :facebook_user?
+  attr_accessible :email, :first_name, :last_name, :uid, :username, :token, :password, :password_confirmation
+
+  unless :facebook_user?
+    has_secure_password
+  end
 
 	before_save { |user| user.email = email.downcase }
-	# before_save :create_token
+	before_save :create_token
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :username, 	presence: true,
@@ -16,19 +20,21 @@ class User < ActiveRecord::Base
 
   validates :email, presence:   true,
                     format:     { with: VALID_EMAIL_REGEX },
-                    uniqueness: { case_sensitive: false }
+                    uniqueness: { case_sensitive: false }, unless: :facebook_user?
 
   validates :password, presence: true, length: { minimum: 4 }, unless: :facebook_user?
   validates :password_confirmation, presence: true, unless: :facebook_user?
 
   private
 
-  # def create_token
-  # 	self.token = SecureRandom.urlsafe_base64
-  # end
+  def create_token
+    unless self.token.present?
+      self.token = SecureRandom.urlsafe_base64
+    end
+  end
 
   def facebook_user?
-  	self.uid != nil
+  	self.uid.present?
   end
 
 end

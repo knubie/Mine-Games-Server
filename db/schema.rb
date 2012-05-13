@@ -14,8 +14,9 @@
 ActiveRecord::Schema.define(:version => 20120512034757) do
 
   create_table "decks", :force => true do |t|
-    t.string   "cards"
-    t.string   "hand"
+    t.text     "cards"
+    t.text     "hand"
+    t.integer  "actions"
     t.integer  "user_id"
     t.integer  "match_id"
     t.datetime "created_at", :null => false
@@ -23,9 +24,10 @@ ActiveRecord::Schema.define(:version => 20120512034757) do
   end
 
   create_table "matches", :force => true do |t|
-    t.string   "mine"
-    t.string   "shop"
-    t.string   "log"
+    t.text     "mine"
+    t.text     "shop"
+    t.text     "log"
+    t.integer  "turn"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -36,7 +38,7 @@ ActiveRecord::Schema.define(:version => 20120512034757) do
     t.string   "username"
     t.string   "email"
     t.string   "password_digest"
-    t.integer  "uid"
+    t.string   "uid"
     t.string   "token"
     t.string   "secret"
     t.datetime "created_at",      :null => false

@@ -9,7 +9,9 @@ class Match < ActiveRecord::Base
     for i in 1..15 do mine << 'gold'end
     for i in 1..30 do mine << 'silver'end
     for i in 1..50 do mine << 'copper'end
-    mine = mine.sort do rand end
+    mine = mine.shuffle
     match.mine = mine.join(',')
+    # Total value in mineshaft = 180
+    # Total cards = 100
   end
 end

@@ -4,6 +4,7 @@ class CreateMatches < ActiveRecord::Migration
       t.text :mine
       t.text :shop
       t.text :log
+      t.integer :turn
 
       t.timestamps
     end

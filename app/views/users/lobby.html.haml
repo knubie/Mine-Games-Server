@@ -1,0 +1,10 @@
+= link_to 'new match', new_match_path
+%br
+%br
+- current_user.decks.each do |deck|
+  - deck.match.users.each do |u|
+    = u.username
+    %br
+  = link_to 'play', deck.match
+  %br
+  %br

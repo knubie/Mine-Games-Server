@@ -1,5 +1,15 @@
+%br
+Players:
+%br
 - @match.users.each do |u|
 	= u.username
+	= u.decks.find_by_match_id(@match.id).hand_value
 	%br
 %br
-= @match.mine
+= "Hand: #{@deck.hand}"
+%br
+= "Mine: #{@match.mine}"
+%br
+= "Actions: #{@deck.actions}"
+
+= debug params

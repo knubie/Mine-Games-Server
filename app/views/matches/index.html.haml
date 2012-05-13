@@ -1,2 +1,19 @@
-%h1 Matches#index
-%p Find me in app/views/matches/index.html.haml
+%h1 Listing matches
+
+%table
+  %tr
+    %th Users
+    %th
+    %th
+    %th
+
+  - @matches.each do |user|
+    %tr
+      %td= ""
+      %td= link_to 'Show', user
+      %td= link_to 'Edit', edit_user_path(user)
+      %td= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete
+
+%br
+
+= link_to 'New User', new_user_path

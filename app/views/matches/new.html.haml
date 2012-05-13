@@ -6,10 +6,16 @@
         - @match.errors.full_messages.each do |msg|
           %li= msg
 
-  .field
-    - @users.each do |u|
-      = u.username
-      = check_box_tag 'users[]', "#{u.id}"
-      %br
+  .play_friends
+    %h2
+      Play Friends
+    / - @friends["data"].each do |friend|
+    /   - if User.exists?(uid: friend["id"])
+    / = "name"
+    / = check_box_tag 'users[]', "some_id"
+    /   %br
+  .invite_friends
+    %h2
+      Invite Friends
   .actions
-    = f.submit 'Save'
+    = f.submit 'Create game'

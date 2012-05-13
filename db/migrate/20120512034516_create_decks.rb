@@ -3,6 +3,7 @@ class CreateDecks < ActiveRecord::Migration
     create_table :decks do |t|
       t.text :cards
       t.text :hand
+      t.integer :actions
 
       t.references :user
       t.references :match
