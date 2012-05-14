@@ -15,6 +15,14 @@ class Deck < ActiveRecord::Base
     deck.actions = 1
   end
 
+  def cards_array
+    self.cards.split(',')
+  end
+
+  def hand_array
+    self.hand.split(',')
+  end
+
   def hand_value
     value = 0
     hand = self.hand.split(',')

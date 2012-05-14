@@ -16,13 +16,15 @@ class SessionsController < ApplicationController
 			end
 		elsif request.env['omniauth.auth']
 	  	omniauth = request.env["omniauth.auth"]
-			user = User.find_or_create_by_uid_and_email_and_username_and_token(
+	  	# render :text => request.env["omniauth.auth"].to_yaml
+			user = User.find_or_create_by_uid_and_email_and_username(
 				omniauth[:uid],
 				omniauth[:info][:email],
 				"#{omniauth[:info][:first_name]} #{omniauth[:info][:last_name]}",
-				omniauth[:credentials][:token]
 			)
 			Rails.logger.info(user.errors.inspect) 
+			user.token = omniauth[:credentials][:token]
+			user.save
 			sign_in user
 			redirect_to user
 		else

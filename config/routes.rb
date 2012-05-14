@@ -13,5 +13,6 @@ Server::Application.routes.draw do
   match '/signout', to: 'sessions#destroy', via: :delete
   match '/lobby', to: 'users#lobby'
   post '/friends', to: 'users#friends'
+  post '/matches/:id/actions', to: 'matches#actions'
 
 end

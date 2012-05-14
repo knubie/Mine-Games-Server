@@ -6,10 +6,12 @@ Players:
 	= u.decks.find_by_match_id(@match.id).hand_value
 	%br
 %br
+= "Turn: #{@match.players[@match.turn].username}"
+%br
 = "Hand: #{@deck.hand}"
 %br
-= "Mine: #{@match.mine}"
+= "Deck: #{@deck.cards_array.length}"
+%br
+= "Mine: #{@match.mine_array.length}"
 %br
 = "Actions: #{@deck.actions}"
-
-= debug params

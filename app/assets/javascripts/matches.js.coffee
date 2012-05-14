@@ -3,7 +3,7 @@ $(->
 		$.ajax(
 			url: 'https://graph.facebook.com/me/friends'
 			dataType: 'json'
-			data: 'access_token=AAADhA5sGTqUBAPJnZBoxB8UPWTDziiPGjQHJTK725RcN3UqV4QFtRqMFS2RpAzX8OFWtCJJ91siFuUoOdB3znhzq7JqTKtZAyc6LHq0QZDZD'
+			data: "access_token=#{$.cookie('token')}"
 			success: (data) ->
 				$.ajax(
 					type: 'POST'
@@ -24,7 +24,7 @@ $(->
 				)
 		)
 
-	cool1 = ->
+	signup = ->
 		$.ajax(
 			url: 'http://localhost:3000/users'
 			dataType: 'json'
@@ -42,6 +42,28 @@ $(->
 				console.log(data)
 		)
 
-	new_match()
+	send_action = ->
+		$.ajax(
+			url: "#{document.URL}/actions"
+			dataType: 'json'
+			type: 'POST'
+			data: {
+				actions:
+					[
+						{
+							action: 'draw_from_mine'
+							amount: 1
+						}
+					]
+				cost: -1
+			}
+			success: (data) ->
+				console.log(data)
+		)
+
+	# send_action()
+	# new_match()
+
+
 
 )

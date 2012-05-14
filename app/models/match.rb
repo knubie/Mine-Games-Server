@@ -1,5 +1,5 @@
 class Match < ActiveRecord::Base
-	has_many :decks
+	has_many :decks, :dependent => :destroy
 	has_many :users, :through => :decks
   attr_accessible :log, :mine, :shop
 
@@ -13,5 +13,19 @@ class Match < ActiveRecord::Base
     match.mine = mine.join(',')
     # Total value in mineshaft = 180
     # Total cards = 100
+
   end
+
+  def mine_array
+    self.mine.split(',')
+  end
+
+  def players
+    self.users.sort
+  end
+
+  def current_turn
+    self.players[self.turn]
+  end
+
 end

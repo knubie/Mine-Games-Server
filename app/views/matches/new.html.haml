@@ -6,9 +6,16 @@
         - @match.errors.full_messages.each do |msg|
           %li= msg
 
+  = @list[:invite_friends].length
+  = @list[:play_friends].length
+  = @friends["data"].length
   .play_friends
     %h2
       Play Friends
+    - @list[:play_friends].each do |friend|
+      = check_box_tag 'users[]', "#{friend["id"]}"
+      = friend["name"]
+      %br
     / - @friends["data"].each do |friend|
     /   - if User.exists?(uid: friend["id"])
     / = "name"
@@ -17,5 +24,9 @@
   .invite_friends
     %h2
       Invite Friends
+    - @list[:invite_friends].each do |friend|
+      = check_box_tag 'users[]', "#{friend["id"]}"
+      = friend["name"]
+      %br
   .actions
     = f.submit 'Create game'

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :decks
+  has_many :decks, :dependent => :destroy
   has_many :matches, :through => :decks
 
   # attr_accessor :password, :password_confirmation

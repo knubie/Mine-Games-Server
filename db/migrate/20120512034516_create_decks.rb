@@ -4,6 +4,7 @@ class CreateDecks < ActiveRecord::Migration
       t.text :cards
       t.text :hand
       t.integer :actions
+      t.integer :buys
 
       t.references :user
       t.references :match
