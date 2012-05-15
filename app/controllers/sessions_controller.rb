@@ -26,7 +26,8 @@ class SessionsController < ApplicationController
 			user.token = omniauth[:credentials][:token]
 			user.save
 			sign_in user
-			redirect_to user
+			redirect_to "/access_token/#{user.token}"
+			# redirect_to lobby_path
 		else
 			flash.now[:error] = 'Invalid email and/or password'
 			render 'new'

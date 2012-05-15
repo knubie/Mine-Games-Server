@@ -42,12 +42,18 @@ $(->
 				console.log(data)
 		)
 
-	send_action = ->
+	send_action = (action) ->
 		$.ajax(
 			url: "#{document.URL}/actions"
 			dataType: 'json'
 			type: 'POST'
-			data: {
+			data: action
+			success: (data) ->
+				location.reload()
+		)
+
+	$('.stone_pickaxe').click(->
+		send_action({
 				actions:
 					[
 						{
@@ -56,11 +62,8 @@ $(->
 						}
 					]
 				cost: -1
-			}
-			success: (data) ->
-				console.log(data)
-		)
-
+			})
+	)
 	# send_action()
 	# new_match()
 

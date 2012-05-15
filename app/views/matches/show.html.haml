@@ -8,7 +8,12 @@ Players:
 %br
 = "Turn: #{@match.players[@match.turn].username}"
 %br
-= "Hand: #{@deck.hand}"
+= "Hand:"
+%br
+- @deck.hand_array.each do |card|
+	%a{href: 'javascript:void(0)', class: card.gsub(/ /, '_')}
+		= card
+	%br
 %br
 = "Deck: #{@deck.cards_array.length}"
 %br

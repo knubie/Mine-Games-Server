@@ -1,5 +1,4 @@
 class MatchesController < ApplicationController
-  require 'open-uri'
   def index
     @matches = Match.all
   end

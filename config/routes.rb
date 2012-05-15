@@ -12,7 +12,8 @@ Server::Application.routes.draw do
   match '/signin', to: 'sessions#new'
   match '/signout', to: 'sessions#destroy', via: :delete
   match '/lobby', to: 'users#lobby'
-  post '/friends', to: 'users#friends'
+  get '/friends', to: 'users#friends'
   post '/matches/:id/actions', to: 'matches#actions'
+  get 'access_token/:token', to: 'users#lobby'
 
 end

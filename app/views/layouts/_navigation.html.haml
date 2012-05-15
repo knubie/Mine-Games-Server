@@ -5,3 +5,4 @@
 - else
 	= link_to 'Sign out', signout_path, method: 'delete'
 	= link_to 'Lobby', '/lobby'
+	= "Hello, #{current_user.username}"

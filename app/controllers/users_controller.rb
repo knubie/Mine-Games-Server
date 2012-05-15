@@ -87,16 +87,21 @@ class UsersController < ApplicationController
 
   def friends
     # Returns two arrays of friends, play_friends have already authenticated, invite_friends have not
-    if params[:data]
-      @friends = {play_friends: [], invite_friends: []}
-      params[:data].each do |friend|
-        friend.each do |f|
-          if User.exists?(uid: f["id"]) then @friends[:play_friends] << f else @friends[:invite_friends] << f end
-        end
-      end
+    @list = {play_friends: [], invite_friends: []}
+    @friends = JSON.parse(open("https://graph.facebook.com/me/friends?access_token=#{current_user.token}").read)
+    @friends["data"].each do |friend|
+      if User.exists?(uid: friend["id"]) then @list[:play_friends] << friend else @list[:invite_friends] << friend end
     end
+    # if params[:data]
+    #   @friends = {play_friends: [], invite_friends: []}
+    #   params[:data].each do |friend|
+    #     friend.each do |f|
+    #       if User.exists?(uid: f["id"]) then @friends[:play_friends] << f else @friends[:invite_friends] << f end
+    #     end
+    #   end
+    # end
     respond_to do |format|
-      format.json { render json: @friends }
+      format.json { render json: @list }
     end
   end
 end
