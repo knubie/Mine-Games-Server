@@ -2,14 +2,15 @@ Server::Application.routes.draw do
 
   resources :users
   resources :matches
-  resources :sessions, only: [:new, :create, :destroy]
+  # resources :sessions, only: [:new, :create, :destroy]
 
   root :to => "home#index"
 
   match '/auth/:provider/callback' => 'sessions#create'
 
   match '/signup', to: 'users#new'
-  match '/signin', to: 'sessions#new'
+  get '/signin', to: 'sessions#new'
+  post '/signin', to: 'sessions#create'
   match '/signout', to: 'sessions#destroy', via: :delete
   match '/lobby', to: 'users#lobby'
   get '/friends', to: 'users#friends'

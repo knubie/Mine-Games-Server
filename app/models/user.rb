@@ -6,9 +6,7 @@ class User < ActiveRecord::Base
 
   attr_accessible :email, :first_name, :last_name, :uid, :username, :token, :password, :password_confirmation
 
-  unless :facebook_user?
-    has_secure_password
-  end
+  has_secure_password
 
 	before_save { |user| user.email = email.downcase }
 	before_save :create_token
@@ -28,9 +26,7 @@ class User < ActiveRecord::Base
   private
 
   def create_token
-    unless self.token.present?
-      self.token = SecureRandom.urlsafe_base64
-    end
+    self.token ||= SecureRandom.urlsafe_base64
   end
 
   def facebook_user?
