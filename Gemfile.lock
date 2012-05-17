@@ -153,8 +153,8 @@ DEPENDENCIES
   bcrypt-ruby
   coffee-rails (~> 3.2.1)
   faye
-  haml (>= 3.1.4)
-  haml-rails (>= 0.3.4)
+  haml
+  haml-rails
   jquery-rails
   omniauth
   omniauth-facebook

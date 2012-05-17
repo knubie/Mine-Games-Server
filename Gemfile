@@ -15,5 +15,5 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem "haml", ">= 3.1.4"
-gem "haml-rails", ">= 0.3.4", :group => :development
+gem "haml"
+gem "haml-rails", :group => :development
