@@ -6,7 +6,7 @@ gem 'pg'
 gem 'bcrypt-ruby'
 gem 'omniauth'
 gem 'omniauth-facebook'
-gem 'faye'
+gem 'pusher'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
