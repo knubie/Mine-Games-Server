@@ -115,7 +115,7 @@ class MatchesController < ApplicationController
     end
     @match['users'] = Array.new(@match.users)
     @match['users'].delete(current_user)
-    broadcast '/matches/new', {match: @match, errors: @errors}
+    Pusher['test_channel'].trigger('new_match', {match: @match, errors: @errors})
     respond_to do |format|
       format.html { redirect_to @match, notice: 'Match was successfully created.' }
       format.json { render json: {match: @match, errors: @errors} }
