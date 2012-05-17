@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
 			Rails.logger.info(@user.errors.inspect) 
 			@user.username ||= "#{omniauth[:info][:first_name]} #{omniauth[:info][:last_name]}"
 			@user.email ||= omniauth[:info][:email]
+			@user.password ||= @user.password_confirmation ||= SecureRandom.base64 # Unused but needed to pass validation
 			@user.token = omniauth[:credentials][:token]
 			@user.save
 			sign_in @user

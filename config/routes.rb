@@ -15,6 +15,6 @@ Server::Application.routes.draw do
   match '/lobby', to: 'users#lobby'
   get '/friends', to: 'users#friends'
   post '/matches/:id/actions', to: 'matches#actions'
-  get 'access_token/:token', to: 'users#lobby'
+  get 'access_token/:token', to: 'users#show'
 
 end

@@ -13,7 +13,7 @@
     %h2
       Play Friends
     - @list[:play_friends].each do |friend|
-      = check_box_tag 'users[]', "#{friend["id"]}"
+      = check_box_tag 'fb_users[]', "#{friend["id"]}"
       = friend["name"]
       %br
     / - @friends["data"].each do |friend|
@@ -25,7 +25,7 @@
     %h2
       Invite Friends
     - @list[:invite_friends].each do |friend|
-      = check_box_tag 'users[]', "#{friend["id"]}"
+      = check_box_tag 'fb_users[]', "#{friend["id"]}"
       = friend["name"]
       %br
   .actions
