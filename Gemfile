@@ -15,5 +15,5 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem "haml"
+gem "haml", :git => "https://github.com/haml/haml.git"
 gem "haml-rails", :group => :development

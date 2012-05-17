@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/haml/haml.git
+  revision: 54d47899151f1ccb41ee6cf627eb98f0e4caeb17
+  specs:
+    haml (3.2.0.alpha.11)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -63,7 +69,6 @@ GEM
       yajl-ruby (>= 1.0.0)
     faye-websocket (0.4.5)
       eventmachine (>= 0.12.0)
-    haml (3.1.5)
     haml-rails (0.3.4)
       actionpack (~> 3.0)
       activesupport (~> 3.0)
@@ -153,7 +158,7 @@ DEPENDENCIES
   bcrypt-ruby
   coffee-rails (~> 3.2.1)
   faye
-  haml
+  haml!
   haml-rails
   jquery-rails
   omniauth
