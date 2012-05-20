@@ -1,8 +1,8 @@
 Server::Application.routes.draw do
 
   resources :users
-  resources :matches
-  # resources :sessions, only: [:new, :create, :destroy]
+  # resources :matches
+  resources :sessions, only: [:new, :create, :destroy]
 
   root :to => "home#index"
 
@@ -16,5 +16,6 @@ Server::Application.routes.draw do
   get '/friends', to: 'users#friends'
   post '/matches/:id/actions', to: 'matches#actions'
   get 'access_token/:token', to: 'users#show'
+  get '/matches/all', to: 'matches#all'
 
 end

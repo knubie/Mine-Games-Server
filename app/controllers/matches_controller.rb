@@ -2,8 +2,8 @@ class MatchesController < ApplicationController
   def index
     @matches = current_user.matches
     @matches.each do |match|
-      match['users'] = Array.new(match.users)
-      match['users'].delete(current_user)
+      match['players'] = Array.new(match.users)
+      match['players'].delete(current_user)
     end
     # match = Hash.new
     # @decks = current_user.decks
@@ -14,6 +14,20 @@ class MatchesController < ApplicationController
     #   @matches << match
     # end
 
+    render :json => @matches
+  end
+
+  def all
+    @matches = current_user.matches
+    @matches.each do |match|
+      match[:players] = Array.new(match.users)
+      match[:players].delete(current_user)
+      match.mine = match.mine_array
+      # deck = match.decks.find_by_user_id(current_user)
+      match[:deck] = match.decks.find_by_user_id(current_user)
+      match[:deck].hand = match[:deck].hand_array
+      match[:deck].cards = match[:deck].cards_array
+    end
     render :json => @matches
   end
 
@@ -115,7 +129,7 @@ class MatchesController < ApplicationController
     end
     @match['users'] = Array.new(@match.users)
     @match['users'].delete(current_user)
-    Pusher['test_channel'].trigger('new_match', {match: @match, errors: @errors})
+    Pusher['mine-games'].trigger('new_match', {match: @match, errors: @errors})
     respond_to do |format|
       format.html { redirect_to @match, notice: 'Match was successfully created.' }
       format.json { render json: {match: @match, errors: @errors} }
