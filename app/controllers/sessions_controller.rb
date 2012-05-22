@@ -1,7 +1,4 @@
 class SessionsController < ApplicationController
-	def new
-	end
-
 	def create
 		if params.has_key?(:session)
 			@user = User.find_by_email(params[:session][:email])
