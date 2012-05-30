@@ -13,6 +13,19 @@ class Match < ActiveRecord::Base
     for i in 1..50 do mine << 'copper' end
     mine = mine.shuffle
     match.mine = mine.join(',')
+    for i in 1..10 do
+      shop << 'stone pickaxe'
+      shop << 'iron pickaxe'
+      shop << 'diamond pickaxe'
+      shop << 'tnt'
+      shop << 'minecart'
+      shop << 'headlamp'
+      shop << 'gopher'
+      shop << 'magnet'
+      shop << 'alchemy'
+    end
+    shop = shop.shuffle
+    match.shop = shop.join(',')
     # Total value in mineshaft = 180
     # Total cards = 100
 
@@ -20,6 +33,10 @@ class Match < ActiveRecord::Base
 
   def mine_array
     self.mine.split(',')
+  end
+
+  def shop_array
+    self.shop.split(',')
   end
 
   def players

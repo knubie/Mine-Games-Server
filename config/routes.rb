@@ -10,6 +10,8 @@ Server::Application.routes.draw do
   match '/auth/:provider/callback' => 'sessions#create'
   match '/signout', to: 'sessions#destroy', via: :delete
 
+  post '/end_turn/:id', to: 'matches#end_turn'
+
   # match '/signup', to: 'users#new'
   # get '/signin', to: 'sessions#new'
   # post '/signin', to: 'sessions#create'

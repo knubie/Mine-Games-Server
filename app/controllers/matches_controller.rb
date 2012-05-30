@@ -5,6 +5,7 @@ class MatchesController < ApplicationController
     matches = current_user.matches
     matches.each do |match|
       match.mine = match.mine_array
+      match.turn = true if match.players[match.turn] == true
       match['players'] = Array.new(match.users)
       match['players'].delete(current_user)
     end
@@ -63,15 +64,8 @@ class MatchesController < ApplicationController
 
     # Set up turn
     if errors.empty?
-      i = 0
-      match.players.each do |user|
-        if user.id == current_user.id
-          match.turn = i
-          match.save
-          break
-        end
-        i += 1
-      end
+      match.turn = current_user.id
+      match.save
     else
       match.destroy
       deck.destroy
@@ -85,7 +79,14 @@ class MatchesController < ApplicationController
   # PUT /matches/1
   # PUT /matches/1.json
   def update
+    match = Match.find(params[:id])
     # @user = User.find(params[:id])
+
+    if match.update_attributes(params[:match])
+      render json: {error: "couldn't save"}
+    else
+      render json: match
+    end
 
     # respond_to do |format|
     #   if @user.update_attributes(params[:user])
@@ -101,10 +102,29 @@ class MatchesController < ApplicationController
   # DELETE /matches/1
   # DELETE /matches/1.json
   def destroy
-    @match = Match.find(params[:id])
-    @user.destroy
+    match = Match.find(params[:id])
+    match.destroy
 
     render json: { msg: 'deleted' }
+  end
+
+  def end_turn
+    match = Match.find(params[:id])
+    if match.turn == current_user.id
+      i = match.players.index(current_user) + 1
+      if i == match.players.length
+        match.turn = match.players[0].id
+      else
+        match.turn = match.players[i].id
+      end
+      if match.save
+        render json: {msg: 'turn updated'}
+      else
+        render json: {msg: 'error updating match'}
+      end
+    else
+      render json: {msg: 'not your turn'}
+    end
   end
 
 
