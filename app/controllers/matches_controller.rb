@@ -5,6 +5,7 @@ class MatchesController < ApplicationController
     matches = current_user.matches
     matches.each do |match|
       match.mine = match.mine_array
+      match.shop = match.shop_array
       match.turn = true if match.players[match.turn] == true
       match['players'] = Array.new(match.users)
       match['players'].delete(current_user)
@@ -17,6 +18,7 @@ class MatchesController < ApplicationController
   def show
     match = Match.find(params[:id])
     match.mine = match.mine_array
+    match.shop = match.shop_array
     match['players'] = Array.new(match.users)
     match['players'].delete(current_user)
     render :json => match
@@ -80,7 +82,7 @@ class MatchesController < ApplicationController
   # PUT /matches/1.json
   def update
     match = Match.find(params[:id])
-    # @user = User.find(params[:id])
+    # TODO: change the arrays to strings before saving
 
     if match.update_attributes(params[:match])
       render json: {error: "couldn't save"}
