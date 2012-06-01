@@ -14,27 +14,26 @@
 ActiveRecord::Schema.define(:version => 20120512034757) do
 
   create_table "decks", :force => true do |t|
-    t.text     "cards"
-    t.text     "hand"
-    t.integer  "actions"
-    t.integer  "user_id"
-    t.integer  "match_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string_array "cards",      :limit => 255
+    t.string_array "hand",       :limit => 255
+    t.integer      "actions"
+    t.integer      "buys"
+    t.integer      "user_id"
+    t.integer      "match_id"
+    t.datetime     "created_at",                :null => false
+    t.datetime     "updated_at",                :null => false
   end
 
   create_table "matches", :force => true do |t|
-    t.text     "mine"
-    t.text     "shop"
-    t.text     "log"
-    t.integer  "turn"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string_array "mine",       :limit => 255
+    t.string_array "shop",       :limit => 255
+    t.string_array "log",        :limit => 255
+    t.integer      "turn"
+    t.datetime     "created_at",                :null => false
+    t.datetime     "updated_at",                :null => false
   end
 
   create_table "users", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
     t.string   "username"
     t.string   "email"
     t.string   "password_digest"

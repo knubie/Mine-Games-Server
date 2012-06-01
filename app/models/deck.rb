@@ -10,8 +10,8 @@ class Deck < ActiveRecord::Base
     for i in 1..3 do cards << 'stone pickaxe'end
     hand = cards.shuffle
     for i in 1..5 do hand.delete_at 0 end
-    deck.cards = cards.join(',')
-    deck.hand = hand.join(',')
+    deck.cards = cards
+    deck.hand = hand
     deck.actions = 1
   end
 

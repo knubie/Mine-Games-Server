@@ -12,7 +12,7 @@ class Match < ActiveRecord::Base
     for i in 1..30 do mine << 'silver' end
     for i in 1..50 do mine << 'copper' end
     mine = mine.shuffle
-    match.mine = mine.join(',')
+    match.mine = mine
     for i in 1..10 do
       shop << 'stone pickaxe'
       shop << 'iron pickaxe'
@@ -25,7 +25,7 @@ class Match < ActiveRecord::Base
       shop << 'alchemy'
     end
     shop = shop.shuffle
-    match.shop = shop.join(',')
+    match.shop = shop
     # Total value in mineshaft = 180
     # Total cards = 100
 

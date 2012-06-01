@@ -4,8 +4,6 @@ class MatchesController < ApplicationController
   def index
     matches = current_user.matches
     matches.each do |match|
-      match.mine = match.mine_array
-      match.shop = match.shop_array
       match.turn = true if match.players[match.turn] == true
       match['players'] = Array.new(match.users)
       match['players'].delete(current_user)
@@ -17,8 +15,6 @@ class MatchesController < ApplicationController
   # GET /matches/1.json
   def show
     match = Match.find(params[:id])
-    match.mine = match.mine_array
-    match.shop = match.shop_array
     match['players'] = Array.new(match.users)
     match['players'].delete(current_user)
     render :json => match
