@@ -122,8 +122,7 @@ class MatchesController < ApplicationController
           deck.cards << card
         end
         deck.cards.shuffle!
-        deck.hand = []
-        deck.hand << deck.cards.pop(5)
+        deck.hand = deck.cards.pop(5)
         deck.actions = 1
         deck.save
       else
