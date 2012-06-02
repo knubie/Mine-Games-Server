@@ -12,6 +12,7 @@ class Match < ActiveRecord::Base
     for i in 1..15 do mine << 'gold' end
     for i in 1..30 do mine << 'silver' end
     for i in 1..50 do mine << 'copper' end
+    for i in 1..20 do mine << 'coal' end
     mine = mine.shuffle
     match.mine = mine
     for i in 1..10 do
