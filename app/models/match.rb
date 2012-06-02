@@ -6,7 +6,8 @@ class Match < ActiveRecord::Base
   attr_accessible :log, :mine, :shop
 
   before_create do |match|
-    mine = shop = []
+    mine = []
+    shop = []
     for i in 1..5 do mine << 'diamond' end
     for i in 1..15 do mine << 'gold' end
     for i in 1..30 do mine << 'silver' end
@@ -24,8 +25,8 @@ class Match < ActiveRecord::Base
       shop << 'magnet'
       shop << 'alchemy'
     end
-    shop = shop.shuffle
     match.shop = shop
+    match.shop.sort!
     # Total value in mineshaft = 180
     # Total cards = 100
 

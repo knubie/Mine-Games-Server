@@ -117,6 +117,15 @@ class MatchesController < ApplicationController
       end
       if match.save
         render json: {msg: 'turn updated'}
+        deck = current_user.decks.find_by_match_id(match.id)
+        deck.hand.each do |card|
+          deck.cards << card
+        end
+        deck.cards.shuffle!
+        deck.hand = []
+        deck.hand << deck.cards.pop(5)
+        deck.actions = 1
+        deck.save
       else
         render json: {msg: 'error updating match'}
       end
