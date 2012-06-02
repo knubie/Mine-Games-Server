@@ -12,12 +12,12 @@ Server::Application.routes.draw do
 
   post '/end_turn/:id', to: 'matches#end_turn'
 
-  # match '/signup', to: 'users#new'
+  match '/signup', to: 'users#new'
   # get '/signin', to: 'sessions#new'
   post '/signin', to: 'sessions#create'
-  # match '/signout', to: 'sessions#destroy', via: :delete
+  match '/signout', to: 'sessions#destroy', via: :delete
   # match '/lobby', to: 'users#lobby'
-  # get '/friends', to: 'users#friends'
+  get '/friends', to: 'users#friends'
   # post '/matches/:id/actions', to: 'matches#actions'
   # get 'access_token/:token', to: 'users#show'
   # get '/matches/all', to: 'matches#all'
