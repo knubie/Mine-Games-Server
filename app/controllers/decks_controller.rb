@@ -19,7 +19,11 @@ class DecksController < ApplicationController
   def update
     deck = Deck.find(params[:id])
 
-    if deck.update_attributes(params[:deck])
+    deck.actions = params[:deck][:actions]
+    deck.cards = params[:deck][:cards]
+    deck.hand = params[:deck][:hand]
+
+    if deck.save
       render json: { error: 'there was an error updating the deck' }
     else
       render json: @user.errors, status: :unprocessable_entity

@@ -78,11 +78,13 @@ class MatchesController < ApplicationController
   def update
     match = Match.find(params[:id])
     # TODO: change the arrays to strings before saving
+    match.shop = params[:match][:shop]
+    match.mine = params[:match][:mine]
 
-    if match.update_attributes(params[:match])
-      render json: {error: "couldn't save"}
-    else
+    if match.save
       render json: match
+    else
+      render json: {error: "couldn't save"}
     end
 
     # respond_to do |format|
