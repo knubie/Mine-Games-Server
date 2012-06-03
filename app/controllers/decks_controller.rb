@@ -2,8 +2,8 @@ class DecksController < ApplicationController
   # GET /decks
   # GET /decks.json
   def index
-    # decks = current_user.decks
-    decks = Deck.all
+    decks = current_user.decks
+    # decks = Deck.all
     render :json => decks
   end
 

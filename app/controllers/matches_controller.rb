@@ -4,7 +4,6 @@ class MatchesController < ApplicationController
   def index
     matches = current_user.matches
     matches.each do |match|
-      match.turn = true if match.players[match.turn] == true
       match['players'] = Array.new(match.users)
       match['players'].delete(current_user)
     end
