@@ -29,19 +29,17 @@ class MatchesController < ApplicationController
     errors = []
     
     # Add users
-    if params[:users]
-      params[:users].each do |username|
-        if username.empty?
-          errors << "please enter a username"
+    if params[:user]
+      if params[:user].empty?
+        errors << "please enter a username"
+      else
+        user = User.find_by_username params[:user]
+        if user.nil?
+          errors << "#{params[:user]} not found"
         else
-          user = User.find_by_username username
-          if user.nil?
-            errors << "#{username} not found"
-          else
-            deck = user.decks.create
-            deck.match_id = match.id
-            deck.save
-          end
+          deck = user.decks.create
+          deck.match_id = match.id
+          deck.save
         end
       end
     end
