@@ -33,7 +33,7 @@ class MatchesController < ApplicationController
       if params[:user].empty?
         errors << "please enter a username"
       else
-        user = User.find_by_username params[:user]
+        user = User.find_by_username params[:user] #FIXME: if user is nil, can't modiy frozen hash
         if user.nil?
           errors << "#{params[:user]} not found"
         else
@@ -65,8 +65,8 @@ class MatchesController < ApplicationController
       match.destroy
       deck.destroy
     end
-    match['players'] = Array.new(match.users)
-    match['players'].delete(current_user)
+    match.players = Array.new(match.users)
+    match.players.delete(current_user)
     # Pusher['mine-games'].trigger('new_match', {match: @match, errors: @errors})
     render json: {match: match, errors: errors}
   end
@@ -108,11 +108,11 @@ class MatchesController < ApplicationController
   def end_turn
     match = Match.find(params[:id])
     if match.turn == current_user.id
-      i = match.players.index(current_user) + 1
-      if i == match.players.length
-        match.turn = match.players[0].id
+      i = match.all_players.index(current_user) + 1
+      if i == match.all_players.length
+        match.turn = match.all_players[0].id
       else
-        match.turn = match.players[i].id
+        match.turn = match.all_players[i].id
       end
       if match.save
         render json: {msg: 'turn updated'}

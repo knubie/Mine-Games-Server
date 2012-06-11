@@ -41,7 +41,7 @@ class Match < ActiveRecord::Base
     self.shop.split(',')
   end
 
-  def players
+  def all_players
     self.users.sort
   end
 
