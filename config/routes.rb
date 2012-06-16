@@ -21,5 +21,6 @@ Server::Application.routes.draw do
   # post '/matches/:id/actions', to: 'matches#actions'
   # get 'access_token/:token', to: 'users#show'
   # get '/matches/all', to: 'matches#all'
+  get '/decks_by_user/:user_id', to: 'decks#index'
 
 end

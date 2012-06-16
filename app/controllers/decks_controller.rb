@@ -2,7 +2,12 @@ class DecksController < ApplicationController
   # GET /decks
   # GET /decks.json
   def index
-    decks = current_user.decks
+    if params[:user_id]
+      user = User.find params[:user_id]
+      decks = user.decks
+    else
+      decks = current_user.decks
+    end
     # decks = Deck.all
     render :json => decks
   end
@@ -10,7 +15,11 @@ class DecksController < ApplicationController
   # GET /decks/1
   # GET /decks/1.json
   def show
-    deck = Deck.find(params[:id])
+    if params[:id]
+      deck = Deck.find(params[:id])
+    elsif params[:user_id]
+      deck = Deck.find_by_user_id(params[:user_id])
+    end
     render :json => deck
   end
 
