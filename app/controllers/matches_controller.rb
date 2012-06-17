@@ -80,6 +80,7 @@ class MatchesController < ApplicationController
     match.mine = params[:match][:mine]
 
     if match.save
+      Pusher[match.id].trigger('update')
       render json: match
     else
       render json: {error: "couldn't save"}
