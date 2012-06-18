@@ -78,6 +78,7 @@ class MatchesController < ApplicationController
     # TODO: change the arrays to strings before saving
     match.shop = params[:match][:shop]
     match.mine = params[:match][:mine]
+    match.log = params[:match][:log]
 
     if match.save
       render json: match
