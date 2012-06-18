@@ -65,8 +65,8 @@ class MatchesController < ApplicationController
       match.destroy
       deck.destroy
     end
-    match.players = Array.new(match.users)
-    match.players.delete(current_user)
+    match['players'] = Array.new(match.users)
+    match['players'].delete(current_user)
     # Pusher['mine-games'].trigger('new_match', {match: @match, errors: @errors})
     render json: {match: match, errors: errors}
   end
@@ -81,6 +81,7 @@ class MatchesController < ApplicationController
     match.log = params[:match][:log]
 
     if match.save
+      Pusher["#{match.id}"].trigger('update', {:message => 'match updated'})
       render json: match
     else
       render json: {error: "couldn't save"}
