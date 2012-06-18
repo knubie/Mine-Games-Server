@@ -67,7 +67,9 @@ class MatchesController < ApplicationController
     end
     match['players'] = Array.new(match.users)
     match['players'].delete(current_user)
-    # Pusher['mine-games'].trigger('new_match', {match: @match, errors: @errors})
+    match['players'].each do |player|
+      Pusher["#{player.id}"].trigger('new_match', {:message => 'new match'})
+    end
     render json: {match: match, errors: errors}
   end
 
