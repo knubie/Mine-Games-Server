@@ -128,6 +128,7 @@ class MatchesController < ApplicationController
         deck.hand = deck.cards.pop(5)
         deck.actions = 1
         deck.save
+        Pusher["#{match.id}"].trigger('change_turn', {:message => 'turn changed'})
       else
         render json: {msg: 'error updating match'}
       end
