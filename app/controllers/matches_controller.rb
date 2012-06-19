@@ -33,7 +33,7 @@ class MatchesController < ApplicationController
       if params[:user].empty?
         errors << "please enter a username"
       else
-        user = User.find_by_username params[:user] #FIXME: if user is nil, can't modiy frozen hash
+        user = User.find_by_username params[:user]
         if user.nil?
           errors << "#{params[:user]} not found"
         else
@@ -61,14 +61,14 @@ class MatchesController < ApplicationController
     if errors.empty?
       match.turn = current_user.id
       match.save
+      match['players'] = Array.new(match.users)
+      match['players'].delete(current_user)
+      match['players'].each do |player|
+        Pusher["#{player.id}"].trigger('new_match', {:message => 'new match'})
+      end
     else
       match.destroy
       deck.destroy
-    end
-    match['players'] = Array.new(match.users)
-    match['players'].delete(current_user)
-    match['players'].each do |player|
-      Pusher["#{player.id}"].trigger('new_match', {:message => 'new match'})
     end
     render json: {match: match, errors: errors}
   end
