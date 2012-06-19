@@ -19,6 +19,7 @@ class Match < ActiveRecord::Base
       shop << 'stone pickaxe'
       shop << 'iron pickaxe'
       shop << 'diamond pickaxe'
+      # TODO: change spaces to underscores
       shop << 'tnt'
       shop << 'minecart'
       shop << 'headlamp'

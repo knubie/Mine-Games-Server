@@ -8,7 +8,7 @@ class Deck < ActiveRecord::Base
     cards = []
     hand = []
     for i in 1..7 do cards << 'copper' end
-    for i in 1..3 do cards << 'stone pickaxe' end
+    for i in 1..3 do cards << 'stone pickaxe' end # TODO: change space to underscore
     cards.shuffle!
     hand = cards.pop(5)
     deck.cards = cards
