@@ -64,7 +64,9 @@ class MatchesController < ApplicationController
       match['players'] = Array.new(match.users)
       match['players'].delete(current_user)
       match['players'].each do |player|
-        Pusher["#{player.id}"].trigger('new_match', {:message => 'new match'})
+        unless player.id == current_user.id
+          Pusher["#{player.id}"].trigger('new_match', {:message => 'new match'})
+        end
       end
     else
       match.destroy
