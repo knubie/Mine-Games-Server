@@ -33,7 +33,7 @@ class DecksController < ApplicationController
     deck.hand = params[:deck][:hand]
 
     if deck.save
-      render json: { error: 'there was an error updating the deck' }
+      render json: { error: 'deck updated successfully' }
     else
       render json: @user.errors, status: :unprocessable_entity
     end

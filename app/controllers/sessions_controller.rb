@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
 	  	# render :text => request.env["omniauth.auth"].to_yaml
 			@user = User.find_or_create_by_uid(omniauth[:uid])
 			Rails.logger.info(@user.errors.inspect) 
-			@user.username ||= "#{omniauth[:info][:first_name]} #{omniauth[:info][:last_name]}" # TODO: truncate last name to first letter
+			@user.username ||= "#{omniauth[:info][:first_name]} #{omniauth[:info][:last_name][0]}."
 			@user.email ||= omniauth[:info][:email]
 			@user.password ||= @user.password_confirmation ||= SecureRandom.base64 # Unused but needed to pass validation
 			@user.token = omniauth[:credentials][:token]
