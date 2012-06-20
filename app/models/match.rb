@@ -16,10 +16,9 @@ class Match < ActiveRecord::Base
     mine = mine.shuffle
     match.mine = mine
     for i in 1..10 do
-      shop << 'stone pickaxe'
-      shop << 'iron pickaxe'
-      shop << 'diamond pickaxe'
-      # TODO: change spaces to underscores
+      shop << 'stone_pickaxe'
+      shop << 'iron_pickaxe'
+      shop << 'diamond_pickaxe'
       shop << 'tnt'
       shop << 'minecart'
       shop << 'headlamp'
