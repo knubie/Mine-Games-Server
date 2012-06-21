@@ -28,12 +28,17 @@ class DecksController < ApplicationController
   def update
     deck = Deck.find(params[:id])
 
+
     deck.actions = params[:deck][:actions]
     deck.cards = params[:deck][:cards]
     deck.hand = params[:deck][:hand]
 
+
     if deck.save
-      render json: { error: 'there was an error updating the deck' }
+      unless deck.user_id == current_user.id
+        Pusher["#{player.id}"].trigger('update_deck', {:message => 'deck updated'})
+      end
+      render json: { error: 'deck updated successfully' }
     else
       render json: @user.errors, status: :unprocessable_entity
     end

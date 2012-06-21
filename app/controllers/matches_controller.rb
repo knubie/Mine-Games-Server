@@ -65,7 +65,9 @@ class MatchesController < ApplicationController
       match['players'] = Array.new(match.users)
       match['players'].delete(current_user)
       match['players'].each do |player|
-        Pusher["#{player.id}"].trigger('new_match', {:message => 'new match'})
+        unless player.id == current_user.id
+          Pusher["#{player.id}"].trigger('new_match', {:message => 'new match'})
+        end
       end
     else
       match.destroy
@@ -123,7 +125,7 @@ class MatchesController < ApplicationController
         render json: {msg: 'turn updated'}
         deck = current_user.decks.find_by_match_id(match.id)
         deck.hand.each do |card|
-          deck.cards << card
+          deck.cards = deck.cards << card
         end
         deck.cards.shuffle!
         deck.hand = deck.cards.pop(5)
