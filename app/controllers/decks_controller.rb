@@ -35,7 +35,7 @@ class DecksController < ApplicationController
 
 
     if deck.save
-      unless deck.user_id == current_user.id
+      unless deck.user_id == current_user.id # TODO: decide whether to implement turn checking serverside or client side (server-side = less pusher requests)
         Pusher["#{player.id}"].trigger('update_deck', {:message => 'deck updated'})
       end
       render json: { error: 'deck updated successfully' }
