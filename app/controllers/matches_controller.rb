@@ -60,6 +60,7 @@ class MatchesController < ApplicationController
     # Set up turn
     if errors.empty?
       match.turn = current_user.id
+      match.log << "Match created!"
       match.save
       match['players'] = Array.new(match.users)
       match['players'].delete(current_user)
