@@ -27,18 +27,15 @@ class DecksController < ApplicationController
   # PUT /decks/1.json
   def update
     deck = Deck.find(params[:id])
-    match = Deck.find deck.match_id
-
 
     deck.actions = params[:deck][:actions]
     deck.cards = params[:deck][:cards]
     deck.hand = params[:deck][:hand]
 
-
     if deck.save
       unless deck.user_id == current_user.id # TODO: decide whether to implement turn checking serverside or client side (server-side = less pusher requests)
         Pusher["#{deck.user_id}"].trigger('update_deck', {:message => 'deck updated'})
-        Pusher["#{match.id}"].trigger('update_score', {:message => 'opponent deck updated'})
+        Pusher["#{deck.match_id}"].trigger('update_score', {:message => 'opponent deck updated'})
       end
       render json: { error: 'deck updated successfully' }
     else
