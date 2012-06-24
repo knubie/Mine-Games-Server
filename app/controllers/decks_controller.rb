@@ -27,6 +27,7 @@ class DecksController < ApplicationController
   # PUT /decks/1.json
   def update
     deck = Deck.find(params[:id])
+    match = Deck.find deck.match_id
 
 
     deck.actions = params[:deck][:actions]
@@ -37,6 +38,7 @@ class DecksController < ApplicationController
     if deck.save
       unless deck.user_id == current_user.id
         Pusher["#{player.id}"].trigger('update_deck', {:message => 'deck updated'})
+        Pusher["#{match.id}"].trigger('update_score', {:message => 'opponent deck updated'})
       end
       render json: { error: 'deck updated successfully' }
     else
