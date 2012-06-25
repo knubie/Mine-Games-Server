@@ -84,6 +84,7 @@ class MatchesController < ApplicationController
     match.shop = params[:match][:shop]
     match.mine = params[:match][:mine]
     match.log = params[:match][:log]
+    match.log = params[:match][:last_move]
 
     if match.save
       Pusher["#{match.id}"].trigger('update', {:message => 'match updated'})
