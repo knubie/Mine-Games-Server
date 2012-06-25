@@ -3,7 +3,7 @@ class Match < ActiveRecord::Base
 	has_many :users, :through => :decks
   attr_writer :players
   attr_writer :deck
-  attr_accessible :log, :mine, :shop
+  attr_accessible :log, :mine, :shop, :last_move
 
   before_create do |match|
     mine = []
