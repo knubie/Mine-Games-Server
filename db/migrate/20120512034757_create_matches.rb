@@ -5,6 +5,7 @@ class CreateMatches < ActiveRecord::Migration
       t.string_array :shop
       t.string_array :log
       t.integer :turn
+      t.string :last_move
 
       t.timestamps
     end
