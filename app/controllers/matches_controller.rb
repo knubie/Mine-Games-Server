@@ -80,7 +80,6 @@ class MatchesController < ApplicationController
   # PUT /matches/1.json
   def update
     match = Match.find(params[:id])
-    # TODO: change the arrays to strings before saving
     match.shop = params[:match][:shop]
     match.mine = params[:match][:mine]
     match.log = params[:match][:log]
@@ -93,15 +92,6 @@ class MatchesController < ApplicationController
       render json: {error: "couldn't save"}
     end
 
-    # respond_to do |format|
-    #   if @user.update_attributes(params[:user])
-    #     format.html { redirect_to @user, notice: 'User was successfully updated.' }
-    #     format.json { head :no_content }
-    #   else
-    #     format.html { render action: "edit" }
-    #     format.json { render json: @user.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # DELETE /matches/1
@@ -133,6 +123,7 @@ class MatchesController < ApplicationController
         deck.actions = 1
         deck.save
         Pusher["#{match.id}"].trigger('change_turn', {:message => 'turn changed'})
+        # TODO: perhaps return deck and match model instead of refetching it.
       else
         render json: {msg: 'error updating match'}
       end

@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     # user = User.find_by_token(params[:token])
     # # @user = User.find(params[:id])
 
-    render json: current_user
+    render json: current_use  r
   end
 
   # GET /users/new
