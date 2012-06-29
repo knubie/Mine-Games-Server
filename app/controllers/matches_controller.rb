@@ -106,6 +106,13 @@ class MatchesController < ApplicationController
   def end_turn
     match = Match.find(params[:id])
     if match.turn == current_user.id
+
+      match = Match.find(params[:match][:id])
+      match.shop = params[:match][:shop]
+      match.mine = params[:match][:mine]
+      match.log = params[:match][:log]
+      match.last_move = params[:match][:last_move]
+
       i = match.all_players.index(current_user) + 1
       if i == match.all_players.length
         match.turn = match.all_players[0].id
