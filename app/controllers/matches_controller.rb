@@ -5,7 +5,6 @@ class MatchesController < ApplicationController
     matches = current_user.matches
     matches.each do |match|
       match['players'] = Array.new(match.users)
-      match['players'].delete(current_user)
     end
     render :json => matches
   end
@@ -15,7 +14,6 @@ class MatchesController < ApplicationController
   def show
     match = Match.find(params[:id])
     match['players'] = Array.new(match.users)
-    match['players'].delete(current_user)
     render :json => match
   end
 
@@ -63,7 +61,6 @@ class MatchesController < ApplicationController
       match.log = ["Match created!"]
       match.save
       match['players'] = Array.new(match.users)
-      match['players'].delete(current_user)
       match['players'].each do |player|
         unless player.id == current_user.id
           Pusher["#{player.id}"].trigger('new_match', match)
