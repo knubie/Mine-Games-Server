@@ -95,6 +95,8 @@ GEM
       coderay (~> 1.0.5)
       method_source (~> 0.7.1)
       slop (>= 2.4.4, < 3)
+    pry-rails (0.1.6)
+      pry
     pusher (0.9.3)
       multi_json (~> 1.0)
       signature (~> 0.1.2)
@@ -162,6 +164,7 @@ DEPENDENCIES
   omniauth-facebook
   pg
   pry
+  pry-rails
   pusher
   rails (= 3.2.3)
   sass-rails (~> 3.2.3)

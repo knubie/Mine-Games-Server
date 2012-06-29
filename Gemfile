@@ -9,6 +9,7 @@ gem 'omniauth-facebook'
 gem 'pusher'
 gem 'activerecord-postgres-array'
 gem 'pry'
+gem 'pry-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
