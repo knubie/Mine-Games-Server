@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20120512034757) do
     t.string_array "shop",       :limit => 255
     t.string_array "log",        :limit => 255
     t.integer      "turn"
+    t.string       "last_move"
     t.datetime     "created_at",                :null => false
     t.datetime     "updated_at",                :null => false
   end
