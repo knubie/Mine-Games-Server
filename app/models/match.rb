@@ -5,6 +5,8 @@ class Match < ActiveRecord::Base
   attr_writer :deck
   attr_accessible :log, :mine, :shop, :last_move
 
+  before_save :get_points
+
   before_create do |match|
     mine = []
     shop = []
@@ -29,6 +31,7 @@ class Match < ActiveRecord::Base
     end
     match.shop = shop
     match.shop.sort!
+    match.points = 7
     # Total value in mineshaft = 180
     # Total cards = 100
 
@@ -48,6 +51,16 @@ class Match < ActiveRecord::Base
 
   def current_turn
     self.players[self.turn]
+  end
+
+  def get_points
+    self.points = 0
+    self.hand.each do |card|
+      self.points += 5 if card == 'diamond'
+      self.points += 3 if card == 'gold'
+      self.points += 2 if card == 'silver'
+      self.points += 1 if card == 'copper'
+    end
   end
 
 end
