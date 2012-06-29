@@ -16,16 +16,24 @@ class Deck < ActiveRecord::Base
     deck.cards = cards
     deck.hand = hand
     deck.actions = 1
+    deck.points = 7
   end
 
   def get_points
-    self.points = 0
-    self.hand.each do |card|
-      self.points += 5 if card == 'diamond'
-      self.points += 3 if card == 'gold'
-      self.points += 2 if card == 'silver'
-      self.points += 1 if card == 'copper'
-    end
+    unless self.hand == nil or self.cards == nil
+      self.points = 0
+      self.hand.each do |card|
+        self.points += 5 if card == 'diamond'
+        self.points += 3 if card == 'gold'
+        self.points += 2 if card == 'silver'
+        self.points += 1 if card == 'copper'
+      end
+      self.cards.each do |card|
+        self.points += 5 if card == 'diamond'
+        self.points += 3 if card == 'gold'
+        self.points += 2 if card == 'silver'
+        self.points += 1 if card == 'copper'
+      end
   end
 
 end
