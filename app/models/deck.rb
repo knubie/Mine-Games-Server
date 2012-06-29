@@ -17,7 +17,7 @@ class Deck < ActiveRecord::Base
     deck.hand = hand
     deck.actions = 1
   end
-  
+
   def get_points
     self.points = 0
     self.hand.each do |card|

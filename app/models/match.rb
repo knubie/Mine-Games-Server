@@ -30,7 +30,6 @@ class Match < ActiveRecord::Base
     end
     match.shop = shop
     match.shop.sort!
-    match.points = 7
     # Total value in mineshaft = 180
     # Total cards = 100
 
