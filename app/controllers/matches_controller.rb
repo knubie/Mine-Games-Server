@@ -128,7 +128,7 @@ class MatchesController < ApplicationController
         deck.actions = 1
         deck.save
         Pusher["#{match.id}"].trigger('change_turn', {:message => 'turn changed'})
-        render json: match
+        render json: {match: match, deck: deck}
         # TODO: perhaps return deck and match model instead of refetching it.
       else
         render json: {msg: 'error updating match'}
