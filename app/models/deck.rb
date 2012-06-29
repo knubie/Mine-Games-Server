@@ -34,6 +34,7 @@ class Deck < ActiveRecord::Base
         self.points += 2 if card == 'silver'
         self.points += 1 if card == 'copper'
       end
+    end
   end
 
 end
