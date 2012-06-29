@@ -15,8 +15,13 @@ class UsersController < ApplicationController
   def show
     # user = User.find_by_token(params[:token])
     # # @user = User.find(params[:id])
+    matches = current_user.matches
+    matches.each do |match|
+      match['players'] = Array.new(match.users)
+      match['players'].delete(current_user)
+    end
 
-    render json: {user: current_user, decks: current_user.decks, matches: current_user.matches}
+    render json: {user: current_user, decks: current_user.decks, matches: matches}
   end
 
   # GET /users/new
