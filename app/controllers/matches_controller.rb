@@ -107,7 +107,6 @@ class MatchesController < ApplicationController
     match = Match.find(params[:id])
     if match.turn == current_user.id
 
-      match = Match.find(params[:match][:id])
       match.shop = params[:match][:shop]
       match.mine = params[:match][:mine]
       match.log = params[:match][:log]
