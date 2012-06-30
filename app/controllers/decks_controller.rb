@@ -34,7 +34,6 @@ class DecksController < ApplicationController
 
     if deck.save
       Pusher["#{deck.user_id}"].trigger('update_deck', {:message => 'deck updated'})
-      Pusher["#{deck.match_id}"].trigger('update_score', {:message => 'opponent deck updated'})
       render json: { error: 'deck updated successfully' }
     else
       render json: @user.errors, status: :unprocessable_entity

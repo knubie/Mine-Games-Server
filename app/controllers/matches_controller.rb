@@ -4,7 +4,7 @@ class MatchesController < ApplicationController
   def index
     matches = current_user.matches
     matches.each do |match|
-      match['players'] = Array.new(match.users)
+      match['players'] = Array.new(match.all_players)
     end
     render :json => matches
   end
@@ -13,7 +13,7 @@ class MatchesController < ApplicationController
   # GET /matches/1.json
   def show
     match = Match.find(params[:id])
-    match['players'] = Array.new(match.users)
+    match['players'] = Array.new(match.all_players)
     render :json => match
   end
 
@@ -60,7 +60,7 @@ class MatchesController < ApplicationController
       match.turn = current_user.id
       match.log = ["Match created!"]
       match.save
-      match['players'] = Array.new(match.users)
+      match['players'] = Array.new(match.all_players)
       match['players'].each do |player|
         unless player.id == current_user.id
           Pusher["#{player.id}"].trigger('new_match', match)
@@ -83,7 +83,7 @@ class MatchesController < ApplicationController
     match.last_move = params[:match][:last_move]
 
     if match.save
-      Pusher["#{match.id}"].trigger('update', {:message => 'match updated'})
+      Pusher["#{match.id}"].trigger('update', match)
       render json: match
     else
       render json: {error: "couldn't save"}
