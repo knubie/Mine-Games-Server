@@ -4,7 +4,7 @@ class CreateDecks < ActiveRecord::Migration
       t.string_array :cards
       t.string_array :hand
       t.integer :actions
-      t.integer :buys
+      t.integer :extra_spend
 
       t.references :user
       t.references :match

@@ -2,7 +2,7 @@ class Deck < ActiveRecord::Base
 	belongs_to :user
 	belongs_to :match
 
-  attr_accessible :cards, :hand, :actions
+  attr_accessible :cards, :hand, :actions, :extra_spend
 
   before_create do |deck|
     cards = []
@@ -14,7 +14,7 @@ class Deck < ActiveRecord::Base
     deck.cards = cards
     deck.hand = hand
     deck.actions = 1
-    deck.points = 7
+    deck.extra_spend = 0
   end
 
 end
