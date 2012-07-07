@@ -27,6 +27,11 @@ class Match < ActiveRecord::Base
       shop << 'magnet'
       shop << 'alchemy'
       shop << 'canary'
+      shop << 'mule'
+      shop << 'scrip'
+      shop << 'trash_four'
+      shop << 'action_and_coal'
+      shop << 'play_twice'
     end
     match.shop = shop
     match.shop.sort!
