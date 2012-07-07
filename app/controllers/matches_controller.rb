@@ -123,6 +123,7 @@ class MatchesController < ApplicationController
         deck.cards.shuffle!
         deck.hand = deck.cards.pop(5)
         deck.actions = 1
+        deck.extra_spend = 0
         deck.save
         Pusher["#{match.id}"].trigger('change_turn', {:message => 'turn changed'})
         render json: {match: match, deck: deck}
