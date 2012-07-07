@@ -5,7 +5,6 @@ class CreateDecks < ActiveRecord::Migration
       t.string_array :hand
       t.integer :actions
       t.integer :buys
-      t.integer :points
 
       t.references :user
       t.references :match
