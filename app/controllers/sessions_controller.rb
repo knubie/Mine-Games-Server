@@ -7,7 +7,6 @@ class SessionsController < ApplicationController
 			else
 				@user = {error: 'invalid email/password'}
 			end
-			render json: @user
 		elsif params.has_key? :facebook
 			facebook = params[:facebook]
 			@user = User.find_or_create_by_uid(facebook[:uid])
@@ -31,6 +30,7 @@ class SessionsController < ApplicationController
 		# 	sign_in @user
 		# 	redirect_to "/access_token/#{@user.token}"
 		end
+		render json: @user
 	end
 
 	def destroy
