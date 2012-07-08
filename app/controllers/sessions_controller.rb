@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
 		# 	@user.save
 		# 	sign_in @user
 		# 	redirect_to "/access_token/#{@user.token}"
-		# end
+		end
 	end
 
 	def destroy
