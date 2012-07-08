@@ -3,7 +3,7 @@ class CreateMatches < ActiveRecord::Migration
     create_table :matches do |t|
       t.string_array :mine
       t.string_array :shop
-      t.string_array :log
+      t.text_array :log
       t.integer :turn
       t.string :last_move
 
