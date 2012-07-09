@@ -29,7 +29,7 @@ class Match < ActiveRecord::Base
       shop << 'canary'
       shop << 'mule'
       shop << 'scrip'
-      shop << 'trash_four'
+      shop << 'moon_shine'
       shop << 'action_and_coal'
       shop << 'play_twice'
     end
